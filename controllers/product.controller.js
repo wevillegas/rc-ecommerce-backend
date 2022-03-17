@@ -33,13 +33,11 @@ async function getProducts(req, res) {
 
     // const searchParams = req.query;
     //variable que guardará los parametros para realizar la busqueda de los productos
-    const searchParams = req.query.name ? {
-        // en la variable se guardará el parametro del nombre, para que la busqueda sea no solo con los names que coincidan al 100% (o sea, que tienen el nombre identico al parametro), se usa el regex. Si no pongo nada, me devolvera un objeto vacio y por consiguiente me devolderá todos los documentos
-        name: {
-            '$regex': req.query.name,
-            '$options': 'i'
-        }
-    } : {}
+    // en la variable se guardará el parametro del nombre, para que la busqueda sea no solo con los names que coincidan al 100% (o sea, que tienen el nombre identico al parametro), se usa el regex. Si no pongo nada, me devolvera un objeto vacio y por consiguiente me devolderá todos los documentos
+    const searchParams = req.query.name ? {name: new RegExp(req.query.name, "i")} : {}
+
+    //$and $or $gte $lte $ne 
+
     // Destructurar array, si se que mi array devuelve una cantidad fija de elementos puedo definir un array del lado derecho en el que por indice inicializo una variable con nombre referida a el valor que tiene el array declarado a la derecha de su mismo index
     // **Equivalente
     // const productosDB = result[0]
